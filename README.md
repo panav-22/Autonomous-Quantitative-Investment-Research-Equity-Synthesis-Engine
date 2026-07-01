@@ -25,7 +25,7 @@ The diagram below outlines how a user request flows through the frontend, API ga
 graph TD
     UI[Streamlit Analyst Portal] <-->|HTTP POST /api/v1/analyze| API[FastAPI Gateway]
     
-    subgraph Quant-Sentiment Agent Workspace (CrewAI)
+    subgraph "Quant-Sentiment Agent Workspace (CrewAI)"
         API -->|Orchestrate Crew| Crew[Financial Research Crew]
         Crew -->|Task 1: Fundamental Analysis| Agent1[Senior Quantitative Analyst]
         Agent1 -->|yfinance API| Tool1[Fundamental Metrics & Benchmarking Tools]
@@ -37,12 +37,12 @@ graph TD
 
     Crew -->|Generate Report.md| API
     
-    subgraph Data Archival & Persistence
+    subgraph "Data Archival & Persistence"
         API -->|Durable upload| Blob[Azure Blob Storage]
         API -->|Log report metadata| DB[Azure Database for PostgreSQL]
     end
     
-    subgraph Enterprise Observability
+    subgraph "Enterprise Observability"
         Crew -.->|Prompt Tracing| LS[LangSmith]
         API -.->|Telemetry & Spans| AZM[Azure Monitor via OpenTelemetry]
     end
